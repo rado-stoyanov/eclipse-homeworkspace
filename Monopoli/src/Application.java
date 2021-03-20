@@ -27,6 +27,8 @@ public class Application {
 	private static int chanceElements = 3;
 	private static int stealElements = 3;
 	
+	private static String newElement;
+	
 	private static String[][] GamePlot = new String[GAME_PLOT_ROWS][GAME_PLOT_COLS];
 	
 		
@@ -50,14 +52,12 @@ public class Application {
 		}
 	}
 	
+	
 	private static String choosenElementForAdding() {
 		
 		Random index = new Random();	
 		int newElementIndex = index.nextInt(5);
-		
-		String newElement = "|X|";
-		
-		
+
 		if(newElementIndex == 0) {
 			if(trapElements != 0) {
 				newElement = ELEMENT_BORDER + TRAP + ELEMENT_BORDER;
@@ -90,15 +90,14 @@ public class Application {
 				choosenElementForAdding();
 			}
 		}
-		else if(newElementIndex == 3) {
+		else if(newElementIndex == 4) {
 			if(stealElements != 0) {
 				newElement = ELEMENT_BORDER + STEAL + ELEMENT_BORDER;
 				stealElements--;
 			}else {
 				choosenElementForAdding();
 			}		
-		}
-		
+		}		
 		return newElement;
 	}
 	
@@ -107,8 +106,7 @@ public class Application {
 //		
 //		Random index = new Random();	
 //		int newElementIndex = index.nextInt(5);
-//		
-//		String newElement = "|X|";
+//
 //		
 //		switch(newElementIndex) {
 //			case 0:
