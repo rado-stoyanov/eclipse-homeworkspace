@@ -42,16 +42,15 @@ public class Application {
 	
 	public static void getPlayerPosition() {
 		int dice = rollTheDice();
-		System.out.println(dice);
-		int nextCurrentPosition = currentPosition + dice;
-			
+		int nextCurrentPosition = currentPosition + dice;	
+		
 		if(nextCurrentPosition >= ALL_BOARD_POSITIONS) {
 			currentPosition = currentPosition + dice - ALL_BOARD_POSITIONS;
-			allPlayers.get(0).setPosition(GamePlot.GamePlot[currentPosition]);
 		}else {
-			currentPosition += dice;
-			allPlayers.get(0).setPosition(GamePlot.GamePlot[currentPosition]);
+			currentPosition += dice;	
 		}
+		
+		allPlayers.get(0).setPosition(GamePlot.GamePlot[currentPosition]);
 	}
 	
 	
