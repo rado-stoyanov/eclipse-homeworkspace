@@ -32,7 +32,7 @@ public class PlayGround {
 	public void render() {
 		for(int row = 0 ; row < ROW_COUNT; row++) {
 			for(int col = 0; col < COL_COUNT; col++) {
-				Console.log(collection[row][col].renderElement());
+				Console.log(collection[row][col].render());
 			}
 			Console.logln("");
 		}

@@ -1,14 +1,13 @@
 package buildingwar;
 
-import buildingwar.manager.PlayGroundManager;
+import buildingwar.manager.ApplicationManager;
 
 public class Application {
 
 	public static void main(String[] args) {
 		
-		PlayGroundManager newGame = new PlayGroundManager();
-		newGame.start();
-
+		ApplicationManager game = new ApplicationManager();	
+		game.start();
 	}
 
 }

@@ -26,6 +26,6 @@ public abstract class PlayGroundObject {
 		this.col = col;
 	}
 	
-	public abstract String renderElement();
+	public abstract String render();
 
 }
