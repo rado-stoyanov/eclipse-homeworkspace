@@ -37,4 +37,61 @@ public class PlayGround {
 			Console.logln("");
 		}
 	}
+	
+	public PlayGroundObject getTankElement() {
+		int rowDummy = 0;
+		int colDummy = 0;
+		
+		for(int row = 0 ; row < ROW_COUNT; row++) {
+			for(int col = 0; col < COL_COUNT; col++) {
+				if(collection[row][col].render() == "1") {
+					return collection[row][col];
+				}
+			}			
+		}
+		return collection[rowDummy][colDummy];
+	}
+	
+	public PlayGroundObject getSniperElement() {
+		int rowDummy = 0;
+		int colDummy = 0;
+		
+		for(int row = 0 ; row < ROW_COUNT; row++) {
+			for(int col = 0; col < COL_COUNT; col++) {
+				if(collection[row][col].render() == "2") {
+					return collection[row][col];
+				}
+			}			
+		}
+		return collection[rowDummy][colDummy];
+	}
+	
+	public PlayGroundObject getSpyElement() {
+		int rowDummy = 0;
+		int colDummy = 0;
+		
+		for(int row = 0 ; row < ROW_COUNT; row++) {
+			for(int col = 0; col < COL_COUNT; col++) {
+				if(collection[row][col].render() == "3") {
+					return collection[row][col];
+				}
+			}			
+		}
+		return collection[rowDummy][colDummy];
+	}
+	
+	public PlayGroundObject getWreckerElement() {
+		int rowDummy = 0;
+		int colDummy = 0;
+		
+		for(int row = 0 ; row < ROW_COUNT; row++) {
+			for(int col = 0; col < COL_COUNT; col++) {
+				if(collection[row][col].render() == "4") {
+					return collection[row][col];
+				}
+			}			
+		}
+		return collection[rowDummy][colDummy];
+	}
+	
 }

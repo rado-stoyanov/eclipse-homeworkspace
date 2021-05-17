@@ -7,13 +7,13 @@ import buildingwar.util.Generate;
 
 public class BuildingManager {
 	
-	boolean isFirstQuadrantFull = false;
-	boolean isSecondQuadrantFull = false;
-	boolean isThirdQuadrantFull = false;
+	protected boolean isFirstQuadrantFull = false;
+	protected boolean isSecondQuadrantFull = false;
+	protected boolean isThirdQuadrantFull = false;
 	
-	boolean isSmallBuildUsed = false;
-	boolean isMediumBuildUsed = false;
-	boolean isBigBuildUsed = false;
+	protected boolean isSmallBuildUsed = false;
+	protected boolean isMediumBuildUsed = false;
+	protected boolean isBigBuildUsed = false;
 	
 		
 	public void boostrap() {
