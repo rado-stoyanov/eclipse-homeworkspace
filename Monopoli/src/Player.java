@@ -1,11 +1,14 @@
+//import java.util.ArrayList;
+
 public class Player {
-	
-	
+		
+	public Object PlayerSymbol = "|@|";
 	private String name;
 	private int money;
-	private String position;
-	private boolean isOnTheMove;
-	
+	private Object position;
+	private int indexPosition;
+	//public static ArrayList<Player> allPlayers 		= new ArrayList<Player>();
+		
 	public String getName() {
 		return name;
 	}
@@ -20,36 +23,30 @@ public class Player {
 		this.money = money;
 	}
 	
-	public String getPosition() {
+	public Object getPosition() {
 		return position;
 	}
-	public void setPosition(String position) {
-		this.position = position;
-	}
-	public boolean isOnTheMove() {
-		return isOnTheMove;
-	}
-	public void setOnTheMove(boolean isOnTheMove) {
-		this.isOnTheMove = isOnTheMove;
+	public void setPosition(Object gamePlot) {
+		this.position = gamePlot;
 	}
 	
-	public Player(String name, int money, String positionIndex) {
+	public int getIndexPosition() {
+		return indexPosition;
+	}
+	public void setIndexPosition(int indexPosition) {
+		this.indexPosition = indexPosition;
+	}
+		
+	public Player(String name, int money, Object gamePlot, int indexPosition) {
 		this.name = name;
 		this.money = money;
-		this.position = positionIndex;
-
-	}
-	
-	public Player() {
-		// TODO Auto-generated constructor stub
+		this.position = gamePlot;
+		this.indexPosition = indexPosition;
 	}
 	
 	public void renderPlayer() {
-		System.out.println(this.name + ": с " + this.money + "$ " + "на позиция " + this.position);
+		System.out.println(this.name + ": с " + this.money + "$ " + "на позиция " + this.position + this.indexPosition);
 	}
-	
-	
-
 
 
 }
