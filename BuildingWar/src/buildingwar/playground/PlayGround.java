@@ -1,5 +1,10 @@
 package buildingwar.playground;
 
+import buildingwar.squad.child.SoldierSniper;
+import buildingwar.squad.child.SoldierSpy;
+import buildingwar.squad.child.SoldierTank;
+import buildingwar.squad.child.SoldierWrecker;
+import buildingwar.squad.parent.Squad;
 import buildingwar.util.Console;
 
 public class PlayGround {
@@ -39,59 +44,52 @@ public class PlayGround {
 	}
 	
 	public PlayGroundObject getTankElement() {
-		int rowDummy = 0;
-		int colDummy = 0;
-		
+
 		for(int row = 0 ; row < ROW_COUNT; row++) {
 			for(int col = 0; col < COL_COUNT; col++) {
-				if(collection[row][col].render() == "1") {
-					return collection[row][col];
+				if(collection[row][col] instanceof SoldierTank) {
+					return (Squad) collection[row][col];
 				}
 			}			
 		}
-		return collection[rowDummy][colDummy];
+		return collection[0][0];
 	}
 	
 	public PlayGroundObject getSniperElement() {
-		int rowDummy = 0;
-		int colDummy = 0;
-		
+
 		for(int row = 0 ; row < ROW_COUNT; row++) {
 			for(int col = 0; col < COL_COUNT; col++) {
-				if(collection[row][col].render() == "2") {
-					return collection[row][col];
+				if(collection[row][col] instanceof SoldierSniper) {
+					return (Squad) collection[row][col];
 				}
 			}			
 		}
-		return collection[rowDummy][colDummy];
+		return collection[0][0];
 	}
 	
 	public PlayGroundObject getSpyElement() {
-		int rowDummy = 0;
-		int colDummy = 0;
-		
+
 		for(int row = 0 ; row < ROW_COUNT; row++) {
 			for(int col = 0; col < COL_COUNT; col++) {
-				if(collection[row][col].render() == "3") {
-					return collection[row][col];
+				if(collection[row][col] instanceof SoldierSpy) {
+					return (Squad) collection[row][col];
 				}
 			}			
 		}
-		return collection[rowDummy][colDummy];
+		return collection[0][0];
 	}
 	
 	public PlayGroundObject getWreckerElement() {
-		int rowDummy = 0;
-		int colDummy = 0;
-		
+
 		for(int row = 0 ; row < ROW_COUNT; row++) {
 			for(int col = 0; col < COL_COUNT; col++) {
-				if(collection[row][col].render() == "4") {
-					return collection[row][col];
+				if(collection[row][col] instanceof SoldierWrecker) {
+					return (Squad) collection[row][col];
 				}
 			}			
 		}
-		return collection[rowDummy][colDummy];
+		return collection[0][0];
 	}
+	
 	
 }

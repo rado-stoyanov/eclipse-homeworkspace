@@ -1,4 +1,4 @@
-package buildingwar.surface.parent;
+package buildingwar.surface;
 
 import buildingwar.playground.PlayGroundObject;
 

@@ -1,17 +1,16 @@
 package buildingwar.manager;
 
+import buildingwar.contracts.PlayGroundStatus;
 import buildingwar.playground.*;
-import buildingwar.surface.parent.*;
+import buildingwar.surface.*;
+import buildingwar.surface.Surface;
 
 public class PlayGroundManager {
-	
-	private final int ROW_COUNT = 15;
-	private final int COL_COUNT = 15;
 		
 	public void bootstrap() {
 		
-		for(int row = 0; row < ROW_COUNT; row++) {
-			for(int col = 0; col < COL_COUNT; col++) {
+		for(int row = 0; row < PlayGroundStatus.ROW_COUNT; row++) {
+			for(int col = 0; col < PlayGroundStatus.COL_COUNT; col++) {
 				PlayGround.getInstance().setElement(row, col, new Surface(row, col));				
 			}
 		}

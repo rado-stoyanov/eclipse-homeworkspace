@@ -1,129 +1,129 @@
 package buildingwar.manager;
 
+import java.util.ArrayList;
+
+import buildingwar.contracts.PlayGroundStatus;
+import buildingwar.contracts.SoldierStatus;
 import buildingwar.playground.PlayGround;
 import buildingwar.playground.PlayGroundObject;
 import buildingwar.squad.child.SoldierSniper;
 import buildingwar.squad.child.SoldierSpy;
 import buildingwar.squad.child.SoldierTank;
 import buildingwar.squad.child.SoldierWrecker;
-import buildingwar.surface.parent.Surface;
+import buildingwar.squad.parent.Squad;
+import buildingwar.surface.Surface;
+import buildingwar.util.Console;
 
 public class SquadManager {
-
 	
+	int currentTankRow = PlayGround.getInstance().getTankElement().getRow();
+	int currentTankCol = PlayGround.getInstance().getTankElement().getCol();	
+	int currentSniperRow = PlayGround.getInstance().getSniperElement().getRow();
+	int currentSniperCol = PlayGround.getInstance().getSniperElement().getCol();	
+	int currentSpyRow = PlayGround.getInstance().getSpyElement().getRow();
+	int currentSpyCol = PlayGround.getInstance().getSpyElement().getCol();	
+	int currentWreckerRow = PlayGround.getInstance().getWreckerElement().getRow();
+	int currentWreckerCol = PlayGround.getInstance().getWreckerElement().getCol();
+	
+	private ArrayList<Squad> squadCollection = new ArrayList<Squad>();
+		
 	public void boostrap() {
 		setStartSoldierPositionInLine();	
 	}
 	
 	
 	private void setStartSoldierPositionInLine() {
-
-		final int START_SOLDIER_ROW_POSITION 	= 14;
-		final int START_TANK_COL_POSITION 		= 11;
-		final int START_SNIPER_COL_POSITION 	= 12;
-		final int START_SPY_COL_POSITION 		= 13;
-		final int START_WRECKER_COL_POSITION 	= 14;
 				
-		PlayGround.getInstance().setElement(START_SOLDIER_ROW_POSITION, START_TANK_COL_POSITION, 
-											new SoldierTank(START_SOLDIER_ROW_POSITION, START_TANK_COL_POSITION, true, true));	
+		PlayGround.getInstance().setElement(SoldierStatus.START_SOLDIER_ROW_POSITION, SoldierStatus.START_TANK_COL_POSITION, 
+											new SoldierTank(SoldierStatus.START_SOLDIER_ROW_POSITION, 
+															SoldierStatus.START_TANK_COL_POSITION, 
+															SoldierStatus.IS_SOLDIER_LIFE, 
+															SoldierStatus.IS_MAIN_SOLDIER));	
 										
-		PlayGround.getInstance().setElement(START_SOLDIER_ROW_POSITION, START_SNIPER_COL_POSITION, 
-											new SoldierSniper(START_SOLDIER_ROW_POSITION, START_SNIPER_COL_POSITION, true, false));
+		PlayGround.getInstance().setElement(SoldierStatus.START_SOLDIER_ROW_POSITION, SoldierStatus.START_SNIPER_COL_POSITION, 
+											new SoldierSniper(SoldierStatus.START_SOLDIER_ROW_POSITION, 
+															  SoldierStatus.START_SNIPER_COL_POSITION, 
+															  SoldierStatus.IS_SOLDIER_LIFE, 
+															  SoldierStatus.IS_NOT_MAIN_SOLDIER));
 											
-		PlayGround.getInstance().setElement(START_SOLDIER_ROW_POSITION, START_SPY_COL_POSITION, 
-											new SoldierSpy(START_SOLDIER_ROW_POSITION, START_SPY_COL_POSITION, true, false));
+		PlayGround.getInstance().setElement(SoldierStatus.START_SOLDIER_ROW_POSITION, SoldierStatus.START_SPY_COL_POSITION, 
+											new SoldierSpy(SoldierStatus.START_SOLDIER_ROW_POSITION, 
+														   SoldierStatus.START_SPY_COL_POSITION, 
+														   SoldierStatus.IS_SOLDIER_LIFE, 
+														   SoldierStatus.IS_NOT_MAIN_SOLDIER));
 																								
-		PlayGround.getInstance().setElement(START_SOLDIER_ROW_POSITION, START_WRECKER_COL_POSITION, 
-											new SoldierWrecker(START_SOLDIER_ROW_POSITION, START_WRECKER_COL_POSITION, true, false));				
+		PlayGround.getInstance().setElement(SoldierStatus.START_SOLDIER_ROW_POSITION, SoldierStatus.START_WRECKER_COL_POSITION, 
+											new SoldierWrecker(SoldierStatus.START_SOLDIER_ROW_POSITION, 
+															   SoldierStatus.START_WRECKER_COL_POSITION, 
+															   SoldierStatus.IS_SOLDIER_LIFE, 
+															   SoldierStatus.IS_NOT_MAIN_SOLDIER));	
 	}	
 	
 	public void processActionMove(String actionKey) {
 		
+		squadCollection.add((Squad) PlayGround.getInstance().getTankElement());
+		squadCollection.add((Squad) PlayGround.getInstance().getSniperElement());
+		squadCollection.add((Squad) PlayGround.getInstance().getSpyElement());
+		squadCollection.add((Squad) PlayGround.getInstance().getWreckerElement());	
+		
+		int mainSoldierRow = squadCollection.get(0).getRow();
+		int mainSoldierCol = squadCollection.get(0).getCol();
+		
+		int secondSoldierRow = squadCollection.get(1).getRow();
+		int secondSoldierCol = squadCollection.get(1).getCol();
+		
+		int thirdSoldierRow = squadCollection.get(2).getRow();
+		int thirdSoldierCol = squadCollection.get(2).getCol();
+		
+		int fourthSoldierRow = squadCollection.get(3).getRow();
+		int fourthSoldierCol = squadCollection.get(3).getCol();
+		
+		
 		if((actionKey.equals(KeyManager.FORWARD)) || (actionKey.equals(KeyManager.BACKWARD))) {
-			
-			int currentTankRow = PlayGround.getInstance().getTankElement().getRow();
-			int currentTankCol = PlayGround.getInstance().getTankElement().getCol();
-			
-			int currentSniperRow = PlayGround.getInstance().getSniperElement().getRow();
-			int currentSniperCol = PlayGround.getInstance().getSniperElement().getCol();
-			
-			int currentSpyRow = PlayGround.getInstance().getSpyElement().getRow();
-			int currentSpyCol = PlayGround.getInstance().getSpyElement().getCol();
-			
-			int currentWreckerRow = PlayGround.getInstance().getWreckerElement().getRow();
-			int currentWreckerCol = PlayGround.getInstance().getWreckerElement().getCol();
-			
-			
-			for(int row = 0; row < 15; row++) {
-				for(int col = 0; col < 15; col++) {			
 					
-					PlayGroundObject mainSoldier = PlayGround.getInstance().getElement(row, col);
-					
-					if (mainSoldier.render().equals("1")) {
 						int mainSoldierRowMultiplier = getDestinationRow(actionKey);
 						
-						PlayGround.getInstance().setElement((row + mainSoldierRowMultiplier), col, 
-								new SoldierTank((row + mainSoldierRowMultiplier), col));
+						squadCollection.get(0).setRow(mainSoldierRow + mainSoldierRowMultiplier);
+						squadCollection.get(0).setCol(mainSoldierCol);
 						
-						PlayGround.getInstance().setElement(currentTankRow, currentTankCol, 
-								new SoldierSniper(currentTankRow, currentTankCol));
+						squadCollection.get(1).setRow(mainSoldierRow);
+						squadCollection.get(1).setCol(mainSoldierCol);
 						
-						PlayGround.getInstance().setElement(currentSniperRow, currentSniperCol, 
-								new SoldierSpy(currentSniperRow, currentSniperCol));
+						squadCollection.get(2).setRow(secondSoldierRow);
+						squadCollection.get(2).setCol(secondSoldierCol);
 						
-						transformToSurface(currentWreckerRow, currentWreckerCol);
+						squadCollection.get(3).setRow(thirdSoldierRow);
+						squadCollection.get(3).setCol(thirdSoldierCol);
 						
-						PlayGround.getInstance().setElement(currentSpyRow, currentSpyCol, 
-								new SoldierWrecker(currentSpyRow, currentSpyCol));
-
-						return;
-						
-					}																			
-				}
-			}
+						PlayGround.getInstance().setElement((mainSoldierRow + mainSoldierRowMultiplier), mainSoldierCol, squadCollection.get(0));						
+						PlayGround.getInstance().setElement(mainSoldierRow, mainSoldierCol, squadCollection.get(1));						
+						PlayGround.getInstance().setElement(secondSoldierRow, secondSoldierCol, squadCollection.get(2));						
+						PlayGround.getInstance().setElement(thirdSoldierRow, thirdSoldierCol, squadCollection.get(3));																
+						transformToSurface(fourthSoldierRow, fourthSoldierCol);
+																															
 		}
 		
 		if((actionKey.equals(KeyManager.LEFT)) || (actionKey.equals(KeyManager.RIGHT))) {
-			
-			int currentTankRow = PlayGround.getInstance().getTankElement().getRow();
-			int currentTankCol = PlayGround.getInstance().getTankElement().getCol();
-			
-			int currentSniperRow = PlayGround.getInstance().getSniperElement().getRow();
-			int currentSniperCol = PlayGround.getInstance().getSniperElement().getCol();
-			
-			int currentSpyRow = PlayGround.getInstance().getSpyElement().getRow();
-			int currentSpyCol = PlayGround.getInstance().getSpyElement().getCol();
-			
-			int currentWreckerRow = PlayGround.getInstance().getWreckerElement().getRow();
-			int currentWreckerCol = PlayGround.getInstance().getWreckerElement().getCol();
-						
-			
-			for(int row = 0; row < 15; row++) {
-				for(int col = 0; col < 15; col++) {
-					
-					PlayGroundObject mainSoldier = PlayGround.getInstance().getElement(row, col);
-					
-					if (mainSoldier.render().equals("1")) {		
+							
 						int mainSoldierColMultiplier = getDestinationCol(actionKey);
 						
-						PlayGround.getInstance().setElement(row, (col + mainSoldierColMultiplier), 
-								new SoldierTank(row, (col + mainSoldierColMultiplier)));
+						squadCollection.get(0).setRow(mainSoldierRow);
+						squadCollection.get(0).setCol(mainSoldierCol + mainSoldierColMultiplier);
 						
-						PlayGround.getInstance().setElement(currentTankRow, currentTankCol, 
-								new SoldierSniper(currentTankRow, currentTankCol));
+						squadCollection.get(1).setRow(mainSoldierRow);
+						squadCollection.get(1).setCol(mainSoldierCol);
 						
-						PlayGround.getInstance().setElement(currentSniperRow, currentSniperCol, 
-								new SoldierSpy(currentSniperRow, currentSniperCol));
+						squadCollection.get(2).setRow(secondSoldierRow);
+						squadCollection.get(2).setCol(secondSoldierCol);
 						
-						transformToSurface(currentWreckerRow, currentWreckerCol);
+						squadCollection.get(3).setRow(thirdSoldierRow);
+						squadCollection.get(3).setCol(thirdSoldierCol);
 						
-						PlayGround.getInstance().setElement(currentSpyRow, currentSpyCol, 
-								new SoldierWrecker(currentSpyRow, currentSpyCol));
-						
-						return;					
-					}																			
-				}
-			}
+						PlayGround.getInstance().setElement(mainSoldierRow, (mainSoldierCol + mainSoldierColMultiplier), squadCollection.get(0));					
+						PlayGround.getInstance().setElement(mainSoldierRow, mainSoldierCol, squadCollection.get(1));						
+						PlayGround.getInstance().setElement(secondSoldierRow, secondSoldierCol, squadCollection.get(2));						
+						PlayGround.getInstance().setElement(thirdSoldierRow, thirdSoldierCol, squadCollection.get(3));						
+						transformToSurface(fourthSoldierRow, fourthSoldierCol);																	
 		}
 	}
 	
@@ -160,6 +160,44 @@ public class SquadManager {
 		return true;
 	}
 	
+	private void setSoldierLine(int ChoosenMainSoldier) {
+		
+		Squad TankSoldier = (Squad) PlayGround.getInstance().getTankElement();
+		Squad SniperSoldier = (Squad) PlayGround.getInstance().getSniperElement();
+		Squad SpySoldier = (Squad) PlayGround.getInstance().getSpyElement();
+		Squad WreckerSoldier = (Squad) PlayGround.getInstance().getWreckerElement();
+		
+		Squad currentMainSoldier = squadCollection.get(0);
+		int currentMainSoldierRow = currentMainSoldier.getRow();
+		int currentMainSoldierCol = currentMainSoldier.getCol();		
+
+			if(ChoosenMainSoldier == 1) {
+		
+			}
+			
+			if(ChoosenMainSoldier == 2) {
+				int sniperSoldierRow = SniperSoldier.getRow();
+				int sniperSoldierCol = SniperSoldier.getCol();
+				
+				PlayGround.getInstance().setElement(currentMainSoldierRow, currentMainSoldierCol, 
+						new SoldierSniper(currentMainSoldierRow, currentMainSoldierCol, true, 
+								SoldierStatus.IS_MAIN_SOLDIER));
+				
+				currentMainSoldier.seIsPositionMain(false);
+				currentMainSoldier.setRow(sniperSoldierRow);
+				currentMainSoldier.setCol(sniperSoldierCol);
+
+				PlayGround.getInstance().setElement(sniperSoldierRow, sniperSoldierCol, currentMainSoldier);				
+			}
+			
+			if(ChoosenMainSoldier == 3) {
+				
+			}
+			
+			if(ChoosenMainSoldier == 4) {
+				
+			}
+	}
 	
 	
 }

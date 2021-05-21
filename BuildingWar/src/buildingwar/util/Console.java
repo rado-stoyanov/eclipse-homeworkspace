@@ -38,6 +38,11 @@ public final class Console {
 		
 		log(message);
 		return promtInt();
+	}
+
+	public static void logln(int i) {
+		System.out.println(i);
+		
 	}	
 	
 }
