@@ -32,7 +32,7 @@ public abstract class Squad extends PlayGroundObject{
 		return isPositionMain;
 	}
 
-	public void seIsPositionMain(boolean isPositionMain) {
+	public void setIsPositionMain(boolean isPositionMain) {
 		this.isPositionMain = isPositionMain;
 	}
 	

@@ -1,10 +1,10 @@
 package buildingwar.playground;
 
-import buildingwar.squad.child.SoldierSniper;
-import buildingwar.squad.child.SoldierSpy;
-import buildingwar.squad.child.SoldierTank;
-import buildingwar.squad.child.SoldierWrecker;
-import buildingwar.squad.parent.Squad;
+//import buildingwar.squad.child.SoldierSniper;
+//import buildingwar.squad.child.SoldierSpy;
+//import buildingwar.squad.child.SoldierTank;
+//import buildingwar.squad.child.SoldierWrecker;
+//import buildingwar.squad.parent.Squad;
 import buildingwar.util.Console;
 
 public class PlayGround {
@@ -43,53 +43,55 @@ public class PlayGround {
 		}
 	}
 	
-	public PlayGroundObject getTankElement() {
-
-		for(int row = 0 ; row < ROW_COUNT; row++) {
-			for(int col = 0; col < COL_COUNT; col++) {
-				if(collection[row][col] instanceof SoldierTank) {
-					return (Squad) collection[row][col];
-				}
-			}			
-		}
-		return collection[0][0];
-	}
+//	public PlayGroundObject getTankElement() {
+//
+//		for(int row = 0 ; row < ROW_COUNT; row++) {
+//			for(int col = 0; col < COL_COUNT; col++) {
+//				if(collection[row][col] instanceof SoldierTank) {
+//					return (Squad) collection[row][col];
+//				}
+//			}			
+//		}
+//		return collection[0][0];
+//	}
+//	
+//	public PlayGroundObject getSniperElement() {
+//
+//		for(int row = 0 ; row < ROW_COUNT; row++) {
+//			for(int col = 0; col < COL_COUNT; col++) {
+//				if(collection[row][col] instanceof SoldierSniper) {
+//					return (Squad) collection[row][col];
+//				}
+//			}			
+//		}
+//		return collection[0][0];
+//	}
+//	
+//	public PlayGroundObject getSpyElement() {
+//
+//		for(int row = 0 ; row < ROW_COUNT; row++) {
+//			for(int col = 0; col < COL_COUNT; col++) {
+//				if(collection[row][col] instanceof SoldierSpy) {
+//					return (Squad) collection[row][col];
+//				}
+//			}			
+//		}
+//		return collection[0][0];
+//	}
+//	
+//	public PlayGroundObject getWreckerElement() {
+//
+//		for(int row = 0 ; row < ROW_COUNT; row++) {
+//			for(int col = 0; col < COL_COUNT; col++) {
+//				if(collection[row][col] instanceof SoldierWrecker) {
+//					return (Squad) collection[row][col];
+//				}
+//			}			
+//		}
+//		return collection[0][0];
+//	}
 	
-	public PlayGroundObject getSniperElement() {
-
-		for(int row = 0 ; row < ROW_COUNT; row++) {
-			for(int col = 0; col < COL_COUNT; col++) {
-				if(collection[row][col] instanceof SoldierSniper) {
-					return (Squad) collection[row][col];
-				}
-			}			
-		}
-		return collection[0][0];
-	}
 	
-	public PlayGroundObject getSpyElement() {
-
-		for(int row = 0 ; row < ROW_COUNT; row++) {
-			for(int col = 0; col < COL_COUNT; col++) {
-				if(collection[row][col] instanceof SoldierSpy) {
-					return (Squad) collection[row][col];
-				}
-			}			
-		}
-		return collection[0][0];
-	}
-	
-	public PlayGroundObject getWreckerElement() {
-
-		for(int row = 0 ; row < ROW_COUNT; row++) {
-			for(int col = 0; col < COL_COUNT; col++) {
-				if(collection[row][col] instanceof SoldierWrecker) {
-					return (Squad) collection[row][col];
-				}
-			}			
-		}
-		return collection[0][0];
-	}
 	
 	
 }
