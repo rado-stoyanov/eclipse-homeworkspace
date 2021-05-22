@@ -10,10 +10,7 @@ public class KeyManager {
 	public static final int TANK 			= 1;
 	public static final int SNIPER 			= 2;
 	public static final int SPY 			= 3;
-	public static final int WRECKER 		= 4;
-	
-	//public static final String FIRE 		= "f";
-	
+	public static final int WRECKER 		= 4;	
 	
 	public static boolean isDirectionForward(String key) {
 		return key.equals(FORWARD);
@@ -47,11 +44,7 @@ public class KeyManager {
 				keyCodeParameter == SPY 	||
 				keyCodeParameter == WRECKER;
 	}
-	
-//	public static boolean isFireKey(String keyCodeParameter) {
-//		
-//		return 	process(keyCodeParameter).equals(FIRE);
-//	}
+
 	
 	private static String process(String keyCodeParameter) {
 		return keyCodeParameter.toLowerCase(); 
