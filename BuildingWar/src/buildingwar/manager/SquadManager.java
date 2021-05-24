@@ -102,19 +102,12 @@ public class SquadManager {
 				   													   SoldierStatus.IS_NOT_MAIN_SOLDIER));
 	}
 	
-	private void setSoldiersToPlayGround() {
-		PlayGround.getInstance().setElement(SquadCollection.getInstance().getElement(0).getRow(), 
-											SquadCollection.getInstance().getElement(0).getCol(), 
-											SquadCollection.getInstance().getElement(0));				
-		PlayGround.getInstance().setElement(SquadCollection.getInstance().getElement(1).getRow(), 
-											SquadCollection.getInstance().getElement(1).getCol(), 
-											SquadCollection.getInstance().getElement(1));				
-		PlayGround.getInstance().setElement(SquadCollection.getInstance().getElement(2).getRow(), 
-											SquadCollection.getInstance().getElement(2).getCol(), 
-											SquadCollection.getInstance().getElement(2));																	
-		PlayGround.getInstance().setElement(SquadCollection.getInstance().getElement(3).getRow(), 
-											SquadCollection.getInstance().getElement(3).getCol(), 
-											SquadCollection.getInstance().getElement(3));		
+	private void setSoldiersToPlayGround() {		
+		for(int i = 0; i < 4; i++) {
+			PlayGround.getInstance().setElement(SquadCollection.getInstance().getElement(i).getRow(), 
+					SquadCollection.getInstance().getElement(i).getCol(), 
+					SquadCollection.getInstance().getElement(i));			
+		}		
 	}
 		
 	private void transformToSurface(int row, int col) {
