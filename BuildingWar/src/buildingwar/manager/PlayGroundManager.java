@@ -11,7 +11,7 @@ public class PlayGroundManager {
 		
 		for(int row = 0; row < PlayGroundStatus.ROW_COUNT; row++) {
 			for(int col = 0; col < PlayGroundStatus.COL_COUNT; col++) {
-				PlayGround.getInstance().setElement(row, col, new Surface(row, col));				
+				PlayGroundoObject.getInstance().setElement(row, col, new Surface(row, col));				
 			}
 		}
 	}

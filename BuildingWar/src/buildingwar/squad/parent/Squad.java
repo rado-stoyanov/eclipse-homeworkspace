@@ -1,14 +1,14 @@
 package buildingwar.squad.parent;
 
-import buildingwar.playground.PlayGroundObject;
+import buildingwar.playground.PlayGround;
 
-public abstract class Squad extends PlayGroundObject{
+public abstract class Squad extends PlayGround{
 	
 	protected boolean isSoldierLife;
 	protected boolean isPositionMain;
 	
 	public Squad(int row, int col) {
-		super(row, col);
+		super(row, col, false);
 		
 	}
 	

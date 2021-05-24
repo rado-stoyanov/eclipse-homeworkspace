@@ -4,8 +4,7 @@ import java.util.Scanner;
 
 public final class Console {
 	
-	private Console() {
-		
+	private Console() {		
 	}
 	
 	public static void log(String message) {
@@ -15,34 +14,35 @@ public final class Console {
 	public static void logln(String message) {
 		System.out.println(message);
 	}	
+	
+	public static void logln(boolean message) {
+		System.out.println(message);
+	}
 
-	public static String promtString() {
-		
+	public static void logln(int i) {
+		System.out.println(i);	
+	}	
+	
+	
+	
+	public static String promtString() {	
 		Scanner scanner = new Scanner(System.in);
 		return scanner.nextLine();
 	}	
 	
-	public static String promtString(String message) {
-		
+	public static String promtString(String message) {		
 		log(message);
 		return promtString();
 	}
 	
-	public static int promtInt() {
-		
+	public static int promtInt() {	
 		Scanner scanner = new Scanner(System.in);
 		return scanner.nextInt();
 	}	
 	
-	public static int promtInt(String message) {
-		
+	public static int promtInt(String message) {	
 		log(message);
 		return promtInt();
 	}
-
-	public static void logln(int i) {
-		System.out.println(i);
-		
-	}	
 	
 }

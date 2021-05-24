@@ -1,13 +1,13 @@
 package buildingwar.manager;
 
-import buildingwar.contracts.SoldierStatus;
-import buildingwar.playground.PlayGround;
+import buildingwar.contracts.SquadStatus;
+import buildingwar.playground.PlayGroundoObject;
 import buildingwar.squad.child.SoldierSniper;
 import buildingwar.squad.child.SoldierSpy;
 import buildingwar.squad.child.SoldierTank;
 import buildingwar.squad.child.SoldierWrecker;
+import buildingwar.squad.object.SquadObject;
 import buildingwar.squad.parent.Squad;
-import buildingwar.squad.parent.SquadCollection;
 import buildingwar.surface.Surface;
 
 public class SquadManager {
@@ -19,99 +19,110 @@ public class SquadManager {
 	
 	public void processActionMove(String actionKey) {
 		
-		int mainSoldierRow = SquadCollection.getInstance().getElement(0).getRow();
-		int mainSoldierCol = SquadCollection.getInstance().getElement(0).getCol();		
-		int secondSoldierRow = SquadCollection.getInstance().getElement(1).getRow();
-		int secondSoldierCol = SquadCollection.getInstance().getElement(1).getCol();		
-		int thirdSoldierRow = SquadCollection.getInstance().getElement(2).getRow();
-		int thirdSoldierCol = SquadCollection.getInstance().getElement(2).getCol();		
-		int fourthSoldierRow = SquadCollection.getInstance().getElement(3).getRow();
-		int fourthSoldierCol = SquadCollection.getInstance().getElement(3).getCol();
+		int mainSoldierRow = SquadObject.getInstance().getElement(0).getRow();
+		int mainSoldierCol = SquadObject.getInstance().getElement(0).getCol();		
+		int secondSoldierRow = SquadObject.getInstance().getElement(1).getRow();
+		int secondSoldierCol = SquadObject.getInstance().getElement(1).getCol();		
+		int thirdSoldierRow = SquadObject.getInstance().getElement(2).getRow();
+		int thirdSoldierCol = SquadObject.getInstance().getElement(2).getCol();		
+		int fourthSoldierRow = SquadObject.getInstance().getElement(3).getRow();
+		int fourthSoldierCol = SquadObject.getInstance().getElement(3).getCol();
 				
 		if((actionKey.equals(KeyManager.FORWARD)) || (actionKey.equals(KeyManager.BACKWARD))) {
+			
+				if(GameManager.isMoveValid(mainSoldierRow, mainSoldierCol, actionKey)) {
+					int mainSoldierRowMultiplier = getDestinationRow(actionKey);					
+					int mainSoldierNewRow = mainSoldierRow + mainSoldierRowMultiplier;
 					
-						int mainSoldierRowMultiplier = getDestinationRow(actionKey);
-						
-						SquadCollection.getInstance().getElement(0).setRow(mainSoldierRow + mainSoldierRowMultiplier);
-						SquadCollection.getInstance().getElement(0).setCol(mainSoldierCol);					
-						SquadCollection.getInstance().getElement(1).setRow(mainSoldierRow);
-						SquadCollection.getInstance().getElement(1).setCol(mainSoldierCol);						
-						SquadCollection.getInstance().getElement(2).setRow(secondSoldierRow);
-						SquadCollection.getInstance().getElement(2).setCol(secondSoldierCol);						
-						SquadCollection.getInstance().getElement(3).setRow(thirdSoldierRow);
-						SquadCollection.getInstance().getElement(3).setCol(thirdSoldierCol);																																																				
+					if(GameManager.isMovePossible(mainSoldierNewRow, mainSoldierCol)) {
+						SquadObject.getInstance().getElement(0).setRow(mainSoldierNewRow);
+						SquadObject.getInstance().getElement(0).setCol(mainSoldierCol);					
+						SquadObject.getInstance().getElement(1).setRow(mainSoldierRow);
+						SquadObject.getInstance().getElement(1).setCol(mainSoldierCol);						
+						SquadObject.getInstance().getElement(2).setRow(secondSoldierRow);
+						SquadObject.getInstance().getElement(2).setCol(secondSoldierCol);						
+						SquadObject.getInstance().getElement(3).setRow(thirdSoldierRow);
+						SquadObject.getInstance().getElement(3).setCol(thirdSoldierCol);
+						transformToSurface(fourthSoldierRow, fourthSoldierCol);
+					}
+				}																																																									
 		}
 		
 		if((actionKey.equals(KeyManager.LEFT)) || (actionKey.equals(KeyManager.RIGHT))) {
-							
-						int mainSoldierColMultiplier = getDestinationCol(actionKey);	
-						
-						SquadCollection.getInstance().getElement(0).setRow(mainSoldierRow);
-						SquadCollection.getInstance().getElement(0).setCol(mainSoldierCol + mainSoldierColMultiplier);						
-						SquadCollection.getInstance().getElement(1).setRow(mainSoldierRow);
-						SquadCollection.getInstance().getElement(1).setCol(mainSoldierCol);						
-						SquadCollection.getInstance().getElement(2).setRow(secondSoldierRow);
-						SquadCollection.getInstance().getElement(2).setCol(secondSoldierCol);						
-						SquadCollection.getInstance().getElement(3).setRow(thirdSoldierRow);
-						SquadCollection.getInstance().getElement(3).setCol(thirdSoldierCol);																													
+			
+			if(GameManager.isMoveValid(mainSoldierRow, mainSoldierCol, actionKey)) {
+				int mainSoldierColMultiplier = getDestinationCol(actionKey);
+				int mainSoldierNewCol = mainSoldierCol + mainSoldierColMultiplier;
+				
+				if(GameManager.isMovePossible(mainSoldierRow, mainSoldierNewCol)) {
+					SquadObject.getInstance().getElement(0).setRow(mainSoldierRow);
+					SquadObject.getInstance().getElement(0).setCol(mainSoldierNewCol);						
+					SquadObject.getInstance().getElement(1).setRow(mainSoldierRow);
+					SquadObject.getInstance().getElement(1).setCol(mainSoldierCol);						
+					SquadObject.getInstance().getElement(2).setRow(secondSoldierRow);
+					SquadObject.getInstance().getElement(2).setCol(secondSoldierCol);						
+					SquadObject.getInstance().getElement(3).setRow(thirdSoldierRow);
+					SquadObject.getInstance().getElement(3).setCol(thirdSoldierCol);
+					transformToSurface(fourthSoldierRow, fourthSoldierCol);
+				}
+			}																																				
 		}
-		setSoldiersToPlayGround();
-		transformToSurface(fourthSoldierRow, fourthSoldierCol);
+		setSoldiersToPlayGround();		
 	}
 	
 	public void changeMainSoldierPosition(int ChoosenMainSoldierIndex) {
 		
-		Squad currentMainSoldier = SquadCollection.getInstance().getElement(0);
+		Squad currentMainSoldier = SquadObject.getInstance().getElement(0);
 		int currentMainSoldierRow = currentMainSoldier.getRow();
 		int currentMainSoldierCol = currentMainSoldier.getCol();
 		
-		Squad choosenMainSoldier = SquadCollection.getInstance().getElement(ChoosenMainSoldierIndex-1);
+		Squad choosenMainSoldier = SquadObject.getInstance().getElement(ChoosenMainSoldierIndex-1);
 		int choosenMainSoldierRow = choosenMainSoldier.getRow();
 		int choosenMainSoldierCol = choosenMainSoldier.getCol();
 				
 		currentMainSoldier.setRow(choosenMainSoldierRow);
 		currentMainSoldier.setCol(choosenMainSoldierCol);
-		currentMainSoldier.setIsPositionMain(SoldierStatus.IS_NOT_MAIN_SOLDIER);
-		SquadCollection.getInstance().setElement(ChoosenMainSoldierIndex-1, currentMainSoldier);
+		currentMainSoldier.setIsPositionMain(SquadStatus.IS_NOT_MAIN_SOLDIER);
+		SquadObject.getInstance().setElement(ChoosenMainSoldierIndex-1, currentMainSoldier);
 				
 		choosenMainSoldier.setRow(currentMainSoldierRow);
 		choosenMainSoldier.setCol(currentMainSoldierCol);
-		choosenMainSoldier.setIsPositionMain(SoldierStatus.IS_MAIN_SOLDIER);
-		SquadCollection.getInstance().setElement(0, choosenMainSoldier);
+		choosenMainSoldier.setIsPositionMain(SquadStatus.IS_MAIN_SOLDIER);
+		SquadObject.getInstance().setElement(0, choosenMainSoldier);
 		
 		setSoldiersToPlayGround();
 	}
 	
 	private void createStartSoldiers() {
 		
-		SquadCollection.getInstance().setElement(0, new SoldierTank(SoldierStatus.START_SOLDIER_ROW_POSITION, 
-																	SoldierStatus.START_TANK_COL_POSITION, 
-																	SoldierStatus.IS_SOLDIER_LIFE, 
-																	SoldierStatus.IS_MAIN_SOLDIER));	
-		SquadCollection.getInstance().setElement(1, new SoldierSniper(SoldierStatus.START_SOLDIER_ROW_POSITION, 
-				  													  SoldierStatus.START_SNIPER_COL_POSITION, 
-				  													  SoldierStatus.IS_SOLDIER_LIFE, 
-				  													  SoldierStatus.IS_NOT_MAIN_SOLDIER));		
-		SquadCollection.getInstance().setElement(2, new SoldierSpy(SoldierStatus.START_SOLDIER_ROW_POSITION, 
-				   												   SoldierStatus.START_SPY_COL_POSITION, 
-				   												   SoldierStatus.IS_SOLDIER_LIFE, 
-				   												   SoldierStatus.IS_NOT_MAIN_SOLDIER));		
-		SquadCollection.getInstance().setElement(3, new SoldierWrecker(SoldierStatus.START_SOLDIER_ROW_POSITION, 
-				   													   SoldierStatus.START_WRECKER_COL_POSITION, 
-				   													   SoldierStatus.IS_SOLDIER_LIFE, 
-				   													   SoldierStatus.IS_NOT_MAIN_SOLDIER));
+		SquadObject.getInstance().setElement(0, new SoldierTank(SquadStatus.START_SOLDIER_ROW_POSITION, 
+																	SquadStatus.START_TANK_COL_POSITION, 
+																	SquadStatus.IS_SOLDIER_LIFE, 
+																	SquadStatus.IS_MAIN_SOLDIER));	
+		SquadObject.getInstance().setElement(1, new SoldierSniper(SquadStatus.START_SOLDIER_ROW_POSITION, 
+				  													  SquadStatus.START_SNIPER_COL_POSITION, 
+				  													  SquadStatus.IS_SOLDIER_LIFE, 
+				  													  SquadStatus.IS_NOT_MAIN_SOLDIER));		
+		SquadObject.getInstance().setElement(2, new SoldierSpy(SquadStatus.START_SOLDIER_ROW_POSITION, 
+				   												   SquadStatus.START_SPY_COL_POSITION, 
+				   												   SquadStatus.IS_SOLDIER_LIFE, 
+				   												   SquadStatus.IS_NOT_MAIN_SOLDIER));		
+		SquadObject.getInstance().setElement(3, new SoldierWrecker(SquadStatus.START_SOLDIER_ROW_POSITION, 
+				   													   SquadStatus.START_WRECKER_COL_POSITION, 
+				   													   SquadStatus.IS_SOLDIER_LIFE, 
+				   													   SquadStatus.IS_NOT_MAIN_SOLDIER));
 	}
 	
 	private void setSoldiersToPlayGround() {		
 		for(int i = 0; i < 4; i++) {
-			PlayGround.getInstance().setElement(SquadCollection.getInstance().getElement(i).getRow(), 
-					SquadCollection.getInstance().getElement(i).getCol(), 
-					SquadCollection.getInstance().getElement(i));			
+			PlayGroundoObject.getInstance().setElement(SquadObject.getInstance().getElement(i).getRow(), 
+					SquadObject.getInstance().getElement(i).getCol(), 
+					SquadObject.getInstance().getElement(i));			
 		}		
 	}
 		
 	private void transformToSurface(int row, int col) {
-		PlayGround.getInstance().setElement(row, col, 
+		PlayGroundoObject.getInstance().setElement(row, col, 
 				new Surface(row, col));
 	}
 		
@@ -134,11 +145,5 @@ public class SquadManager {
 		if(actionKey.equals(KeyManager.RIGHT)) return upGrade;
 		return 0;		
 	}
-		
-	//TODO
-	private boolean isMoveValid() {		
-		return true;
-	}
-	
 	
 }

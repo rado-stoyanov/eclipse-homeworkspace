@@ -1,11 +1,11 @@
 package buildingwar.surface;
 
-import buildingwar.playground.PlayGroundObject;
+import buildingwar.playground.PlayGround;
 
-public class Surface extends PlayGroundObject{
+public class Surface extends PlayGround{
 
 	public Surface(int row, int col) {
-		super(row, col);
+		super(row, col, true);
 	}
 
 	@Override

@@ -1,7 +1,7 @@
 package buildingwar.manager;
 
 import buildingwar.contracts.GamePlayStatus;
-import buildingwar.playground.PlayGround;
+import buildingwar.playground.PlayGroundoObject;
 import buildingwar.util.Console;
 
 public class ApplicationManager {
@@ -15,16 +15,15 @@ public class ApplicationManager {
 		
 		SquadManager newSquad = new SquadManager();
 		newSquad.boostrap();
-		
+					
 		this.render();
-		
+				
 		loadGamePlay();
-	
 	}
 	
 		
 	private void render() {
-		PlayGround.getInstance().render();
+		PlayGroundoObject.getInstance().render();
 	}
 	
 	
@@ -33,16 +32,16 @@ public class ApplicationManager {
 		Console.logln("Action options:");
 		Console.logln("1. Move");
 		Console.logln("2. Change active main soldier");
-		int modeKey = Console.promtInt("Choose action option: ");
+		String modeKey = Console.promtString("Choose action option: ");
 
 		
-		if(modeKey == GamePlayStatus.MOVE_OPTION) {
+		if(modeKey.equals(GamePlayStatus.MOVE_OPTION)) {
 			String actionKey = Console.promtString("Choose squad direction: ");
 			if(KeyManager.isDirectionKey(actionKey)) {
 				new SquadManager().processActionMove(actionKey);
 			}
 		}
-		if(modeKey == GamePlayStatus.CHANGE_MAIN_SOLDIER) {
+		if(modeKey.equals(GamePlayStatus.CHANGE_MAIN_SOLDIER)) {
 			Console.logln("Squad options: 1(Tank), 2(Sniper), 3(Spy), 4(Wrecker)");
 			int choosenSoldier = Console.promtInt("Choose new main active soldier: ");
 			if(KeyManager.isSoldierKeyOption(choosenSoldier)) {

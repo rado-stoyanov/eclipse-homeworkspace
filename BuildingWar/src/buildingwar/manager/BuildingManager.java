@@ -17,13 +17,11 @@ public class BuildingManager {
 	
 		
 	public void boostrap() {
-		this.BuildingStructureOnGround();
+		this.generateBuildingStructuresOnTheGround();		
 	}
-	
-	
-	private void BuildingStructureOnGround() {	
-		
-		
+
+	private void generateBuildingStructuresOnTheGround() {	
+				
 		if(this.isFirstQuadrantFull == true && this.isSecondQuadrantFull == true && this.isThirdQuadrantFull == true) {
 			return;
 		}
@@ -32,23 +30,21 @@ public class BuildingManager {
 				int choosenGroundQuadrant = Generate.random(3);
 				
 				if(choosenGroundQuadrant == 0 && this.isFirstQuadrantFull == false) {
-					firstQuadrant();
+					firstQuadrantGenerateBuilding();
 				}
 				if(choosenGroundQuadrant == 1 && this.isSecondQuadrantFull == false) {
-					secondQuadrant();
+					secondQuadrantGenerateBuilding();
 				}
 				if(choosenGroundQuadrant == 2 && this.isThirdQuadrantFull == false) {
-					thirdQuadrant();
+					thirdQuadrantGenerateBuilding();
 				}			
 			}	
-			BuildingStructureOnGround();
+			generateBuildingStructuresOnTheGround();
 		}
-		
-
 	}	
 	
 	
-	private void firstQuadrant() {
+	private void firstQuadrantGenerateBuilding() {
 		
 		final int firstQuadrantStartRow = 1;
 		final int firstQuadrantEndRow = 6;
@@ -69,7 +65,7 @@ public class BuildingManager {
 					int smallBuldingPosition = Generate.random(20);
 					
 					if(smallBuldingPosition >= 2 && smallBuldingPosition <= 14) {
-						new SmallBuilding(row, col).createBuilding(row, col);
+						new SmallBuilding(row, col).createBuilding(row, col);						
 						isFirstQuadrantFull = true;
 						isSmallBuildUsed = true;
 						return;
@@ -110,7 +106,7 @@ public class BuildingManager {
 	}
 	
 	
-	private void secondQuadrant() {
+	private void secondQuadrantGenerateBuilding() {
 		
 		final int firstQuadrantStartRow = 1;
 		final int firstQuadrantEndRow = 6;
@@ -171,7 +167,7 @@ public class BuildingManager {
 		}	
 	}
 	
-	private void thirdQuadrant() {
+	private void thirdQuadrantGenerateBuilding() {
 		
 		final int firstQuadrantStartRow = 9;
 		final int firstQuadrantEndRow = 13;
